@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" hidden>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Dani</title>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+			rel="stylesheet">
+
+		<script type="module" src="https://cdn.skypack.dev/twind/shim"></script>
+		<script type="twind-config">
+			{ "theme": { "extend": { "fontFamily": { "sans": ["Inter", "systemui", "sans-serif"] } } } }
+		</script>
+
+		<style>
+			.content::before,
+			.content::after {
+				content: "";
+			}
+
+			canvas {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100vw;
+				height: 100vh;
+				z-index: -1;
+				background: transparent;
+				pointer-events: none;
+			}
+
+			img {
+				aspect-ratio: 1 / 1;
+				object-fit: cover;
+			}
+
+		</style>
+	</head>
+
+	<body class="bg-pink-50 text-gray-800 text-lg">
+		<canvas>Enable canvas to see the cool background effect!</canvas>
+
+		<div class="max-w-3xl mx-auto my-28 px-8">
+			<!-- flex makes the child's width fit only so the background spans the whole text -->
+			<div class="flex">
+				<h1
+					class="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-blue-500">
+					it&rsquo;s dani!
+				</h1>
+			</div>
+
+			<p class="mt-8">
+				hey! i&rsquo;m dani, a 16 year old from
+				<span class="font-semibold">atlanta, georgia</span>. i&rsquo;m a
+				<span class="text-pink-500 font-semibold">web developer</span>
+				who loves to make things. check out my stuff on
+				<a href="https://github.com/cubedhuang" class="mx-0.5 text-blue-500 font-semibold relative content
+						after::(absolute block -inset-x-1 bottom-0 h-4 opacity-10 bg-blue-500 rounded-full transition-all duration-300)
+						hover:after::(inset-x-0 bottom-0 h-2 opacity-30)">
+					github</a>!
+			</p>
+
+			<h2 class="mt-20 text-3xl font-bold text-pink-500">my projects</h2>
+
+			<ul class="ml-6 mt-8 list-disc">
+				<li class="mt-2">
+					<a href="https://nimi.li" class="mx-0.5 text-blue-500 font-semibold relative content
+							after::(absolute block -inset-x-1 bottom-0 h-4 opacity-10 bg-blue-500 rounded-full transition-all duration-300)
+							hover:after::(inset-x-0 bottom-0 h-2 opacity-30)">
+						nimi.li</a>
+					&ndash; a dictionary for the constructed language
+					<span class="font-semibold">toki pona</span>
+				</li>
+				<li class="mt-2">
+					<a href="https://board.dan.onl" class="mx-0.5 text-blue-500 font-semibold relative content
+							after::(absolute block -inset-x-1 bottom-0 h-4 opacity-10 bg-blue-500 rounded-full transition-all duration-300)
+							hover:after::(inset-x-0 bottom-0 h-2 opacity-30)">
+						pseudocode interpreter</a>
+					&ndash; an interpreter for college board&rsquo;s pseudocode on the
+					<span class="font-semibold">ap computer science principles</span> exam
+				</li>
+				<li class="mt-2">
+					<a href="https://boids.cubedhuang.com" class="mx-0.5 text-blue-500 font-semibold relative content
+							after::(absolute block -inset-x-1 bottom-0 h-4 opacity-10 bg-blue-500 rounded-full transition-all duration-300)
+							hover:after::(inset-x-0 bottom-0 h-2 opacity-30)">
+						boids</a>
+					&ndash; a <span class="font-semibold">flocking simulation</span> like the
+					background of this page but cooler
+				</li>
+			</ul>
+
+			<h2 class="mt-20 text-3xl font-bold text-pink-500">abby&rsquo;s cats!</h2>
+
+			<div class="mt-8 grid md:grid-cols-3 gap-4">
+				<img src="https://cdn.discordapp.com/attachments/982000226531414086/1087896295114543165/5867820E-880A-4171-9944-09CC622EF9C9.jpg"
+					alt="captain" class="rounded-xl shadow-lg shadow-pink-600">
+				<img src="https://cdn.discordapp.com/attachments/982000226531414086/1087896176298307684/32E82C0B-95CA-45C1-AF83-225D2BC8066E.jpg"
+					alt="myles" class="rounded-xl shadow-lg shadow-pink-600">
+				<img src="https://cdn.discordapp.com/attachments/982000226531414086/1087897080829313115/1B420E98-E224-41F0-90ED-671E0F6E2057.jpg"
+					alt="myles" class="rounded-xl shadow-lg shadow-pink-600">
+			</div>
+		</div>
+
+		<script>
+			const canvas = document.querySelector("canvas");
+			const ctx = canvas.getContext("2d");
+
+			function resize() {
+				canvas.width = window.innerWidth;
+				canvas.height = window.innerHeight;
+			}
+
+			resize();
+
+			addEventListener("resize", resize);
+
+			const mouse = { x: 0, y: 0 };
+
+			addEventListener("mousemove", (e) => {
+				mouse.x = e.clientX;
+				mouse.y = e.clientY;
+			});
+
+			addEventListener("touchmove", (e) => {
+				mouse.x = e.touches[0].clientX;
+				mouse.y = e.touches[0].clientY;
+			});
+
+			function boid() {
+				return {
+					x: Math.random() * canvas.width,
+					y: Math.random() * canvas.height,
+					vx: Math.random() * 2 - 1,
+					vy: Math.random() * 2 - 1,
+					r: Math.random() * 3 + 2,
+					color: `hsla(${Math.random() * 60 + 300}, 100%, 50%, 0.2)`,
+				};
+			}
+
+			const boids = Array.from({ length: 100 }, boid);
+
+			function draw() {
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+				for (const boid of boids) {
+					ctx.beginPath();
+					ctx.arc(boid.x, boid.y, boid.r, 0, Math.PI * 2);
+					ctx.fillStyle = boid.color;
+					ctx.fill();
+				}
+			}
+
+			function update() {
+				for (const boid of boids) {
+					boid.x += boid.vx;
+					boid.y += boid.vy;
+
+					if (boid.x < 0) {
+						boid.x += canvas.width;
+					} else if (boid.x > canvas.width) {
+						boid.x -= canvas.width;
+					}
+
+					if (boid.y < 0) {
+						boid.y += canvas.height;
+					} else if (boid.y > canvas.height) {
+						boid.y -= canvas.height;
+					}
+
+					{
+						const dx = boid.x - mouse.x;
+						const dy = boid.y - mouse.y;
+						const dist = Math.hypot(dx, dy);
+
+						if (dist < 200) {
+							boid.vx += dx / dist / dist * 10;
+							boid.vy += dy / dist / dist * 10;
+						}
+					}
+
+					for (const other of boids) {
+						if (boid === other) continue;
+
+						const dx = boid.x - other.x;
+						const dy = boid.y - other.y;
+						const dist = Math.hypot(dx, dy);
+
+						if (dist < 100) {
+							boid.vx += dx / dist / dist;
+							boid.vy += dy / dist / dist;
+						}
+					}
+
+					const speed = Math.hypot(boid.vx, boid.vy);
+
+					if (speed > 3) {
+						boid.vx /= speed / 3;
+						boid.vy /= speed / 3;
+					}
+				}
+			}
+
+			function loop() {
+				update();
+				draw();
+
+				requestAnimationFrame(loop);
+			}
+
+			loop();
+
+			draw();
+		</script>
+	</body>
+</html>
