@@ -6,11 +6,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Dani</title>
 
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
 			href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-			rel="stylesheet">
+			rel="stylesheet" />
 
 		<script type="module" src="https://cdn.skypack.dev/twind/shim"></script>
 		<script type="twind-config">
@@ -93,46 +93,51 @@
 				</li>
 			</ul>
 
-			<h2 class="mt-20 text-3xl font-bold text-pink-500">abby&rsquo;s cats!</h2>
+			<h2 class="mt-20 text-3xl font-bold text-pink-500">
+				abby&rsquo;s cats!
+			</h2>
 
 			<div class="mt-8 grid sm:grid-cols-2 md:grid-cols-3 gap-4">
 				<div
 					class="group square relative grid place-items-center rounded-xl shadow-lg overflow-hidden">
 					<img src="https://cdn.discordapp.com/attachments/982000226531414086/1087896295114543165/5867820E-880A-4171-9944-09CC622EF9C9.jpg"
-						alt="captain" class="absolute top-0 left-0 w-full h-full object-cover transition duration-500
-							group-hover:(scale-110)">
+						alt="captain"
+						class="absolute top-0 left-0 w-full h-full object-cover transition duration-500 group-hover:(scale-110)" />
 					<div
 						class="absolute bg-pink-50 top-0 left-0 w-full h-full opacity-0 transition duration-500 group-hover:opacity-75">
 					</div>
-					<h3 class="z-10 text-pink-500 text-2xl font-bold opacity-0 scale-90 transition duration-500
-							group-hover:(opacity-100 scale-100)">
-						captain</h3>
+					<h3
+						class="z-10 text-pink-500 text-2xl font-bold opacity-0 scale-90 transition duration-500 group-hover:(opacity-100 scale-100)">
+						captain
+					</h3>
 				</div>
 
 				<div
 					class="group square relative grid place-items-center rounded-xl shadow-lg overflow-hidden">
 					<img src="https://cdn.discordapp.com/attachments/982000226531414086/1087896176298307684/32E82C0B-95CA-45C1-AF83-225D2BC8066E.jpg"
-						alt="myles" class="absolute top-0 left-0 w-full h-full object-cover transition duration-500
-							group-hover:(scale-110)">
+						alt="myles"
+						class="absolute top-0 left-0 w-full h-full object-cover transition duration-500 group-hover:(scale-110)" />
 					<div
 						class="absolute bg-pink-50 top-0 left-0 w-full h-full opacity-0 transition duration-500 group-hover:opacity-75">
 					</div>
-					<h3 class="z-10 text-pink-500 text-2xl font-bold opacity-0 scale-90 transition duration-500
-							group-hover:(opacity-100 scale-100)">
-						myles</h3>
+					<h3
+						class="z-10 text-pink-500 text-2xl font-bold opacity-0 scale-90 transition duration-500 group-hover:(opacity-100 scale-100)">
+						myles
+					</h3>
 				</div>
 
 				<div
 					class="group square relative grid place-items-center rounded-xl shadow-lg overflow-hidden">
 					<img src="https://cdn.discordapp.com/attachments/982000226531414086/1087897080829313115/1B420E98-E224-41F0-90ED-671E0F6E2057.jpg"
-						alt="lily" class="absolute top-0 left-0 w-full h-full object-cover transition duration-500
-							group-hover:(scale-110)">
+						alt="lily"
+						class="absolute top-0 left-0 w-full h-full object-cover transition duration-500 group-hover:(scale-110)" />
 					<div
 						class="absolute bg-pink-50 top-0 left-0 w-full h-full opacity-0 transition duration-500 group-hover:opacity-75">
 					</div>
-					<h3 class="z-10 text-pink-500 text-2xl font-bold opacity-0 scale-90 transition duration-500
-							group-hover:(opacity-100 scale-100)">
-						lily</h3>
+					<h3
+						class="z-10 text-pink-500 text-2xl font-bold opacity-0 scale-90 transition duration-500 group-hover:(opacity-100 scale-100)">
+						lily
+					</h3>
 				</div>
 			</div>
 		</div>
@@ -151,7 +156,7 @@
 					vx: Math.random() * 2 - 1,
 					vy: Math.random() * 2 - 1,
 					r: Math.random() * 10 + 10,
-					color: `hsla(${Math.random() * 60 + 300}, 100%, 50%, 0.05)`,
+					color: `hsla(${Math.random() * 60 + 300}, 100%, 50%, 0.05)`
 				};
 			}
 
@@ -171,8 +176,6 @@
 				const area = width * height;
 				const amount = Math.min(200, area / 20000);
 
-				console.log(amount);
-
 				if (boids.length < amount) {
 					while (boids.length < amount) {
 						boids.push(boid());
@@ -190,12 +193,12 @@
 
 			const mouse = { x: 0, y: 0 };
 
-			addEventListener("mousemove", (e) => {
+			addEventListener("mousemove", e => {
 				mouse.x = e.clientX;
 				mouse.y = e.clientY;
 			});
 
-			addEventListener("touchmove", (e) => {
+			addEventListener("touchmove", e => {
 				mouse.x = e.touches[0].clientX;
 				mouse.y = e.touches[0].clientY;
 			});
@@ -228,15 +231,13 @@
 						boid.y -= height + 2 * boid.r;
 					}
 
-					{
-						const dx = boid.x - mouse.x;
-						const dy = boid.y - mouse.y;
-						const dist = Math.hypot(dx, dy);
+					const dxMouse = boid.x - mouse.x;
+					const dyMouse = boid.y - mouse.y;
+					const distMouse = Math.hypot(dxMouse, dyMouse);
 
-						if (dist < 100) {
-							boid.vx += dx / dist / dist * 20;
-							boid.vy += dy / dist / dist * 20;
-						}
+					if (distMouse < 100) {
+						boid.vx += (dxMouse / distMouse / distMouse) * 20;
+						boid.vy += (dyMouse / distMouse / distMouse) * 20;
 					}
 
 					for (const other of boids) {
@@ -254,9 +255,11 @@
 
 					const speed = Math.hypot(boid.vx, boid.vy);
 
-					if (speed > 2) {
-						boid.vx /= speed / 2;
-						boid.vy /= speed / 2;
+					const maxSpeed = Math.min(0.2 + 100 / distMouse, 10);
+
+					if (speed > maxSpeed) {
+						boid.vx /= speed / maxSpeed;
+						boid.vy /= speed / maxSpeed;
 					}
 				}
 			}
