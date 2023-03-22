@@ -110,9 +110,47 @@
 			const canvas = document.querySelector("canvas");
 			const ctx = canvas.getContext("2d");
 
+			let width;
+			let height;
+
+			function boid() {
+				return {
+					x: Math.random() * width,
+					y: Math.random() * height,
+					vx: Math.random() * 2 - 1,
+					vy: Math.random() * 2 - 1,
+					r: Math.random() * 10 + 10,
+					color: `hsla(${Math.random() * 60 + 300}, 100%, 50%, 0.05)`,
+				};
+			}
+
+			const boids = [];
+
 			function resize() {
-				canvas.width = window.innerWidth;
-				canvas.height = window.innerHeight;
+				ctx.resetTransform();
+
+				width = window.innerWidth;
+				height = window.innerHeight;
+
+				canvas.width = width * devicePixelRatio;
+				canvas.height = height * devicePixelRatio;
+
+				ctx.scale(devicePixelRatio, devicePixelRatio);
+
+				const area = width * height;
+				const amount = Math.min(200, area / 20000);
+
+				console.log(amount);
+
+				if (boids.length < amount) {
+					while (boids.length < amount) {
+						boids.push(boid());
+					}
+				} else if (boids.length > amount) {
+					while (boids.length > amount) {
+						boids.pop();
+					}
+				}
 			}
 
 			resize();
@@ -131,21 +169,8 @@
 				mouse.y = e.touches[0].clientY;
 			});
 
-			function boid() {
-				return {
-					x: Math.random() * canvas.width,
-					y: Math.random() * canvas.height,
-					vx: Math.random() * 2 - 1,
-					vy: Math.random() * 2 - 1,
-					r: Math.random() * 3 + 2,
-					color: `hsla(${Math.random() * 60 + 300}, 100%, 50%, 0.2)`,
-				};
-			}
-
-			const boids = Array.from({ length: 100 }, boid);
-
 			function draw() {
-				ctx.clearRect(0, 0, canvas.width, canvas.height);
+				ctx.clearRect(0, 0, width, height);
 
 				for (const boid of boids) {
 					ctx.beginPath();
@@ -160,16 +185,16 @@
 					boid.x += boid.vx;
 					boid.y += boid.vy;
 
-					if (boid.x < 0) {
-						boid.x += canvas.width;
-					} else if (boid.x > canvas.width) {
-						boid.x -= canvas.width;
+					if (boid.x < -boid.r) {
+						boid.x += width + 2 * boid.r;
+					} else if (boid.x > width + boid.r) {
+						boid.x -= width + 2 * boid.r;
 					}
 
-					if (boid.y < 0) {
-						boid.y += canvas.height;
-					} else if (boid.y > canvas.height) {
-						boid.y -= canvas.height;
+					if (boid.y < -boid.r) {
+						boid.y += height + 2 * boid.r;
+					} else if (boid.y > height + boid.r) {
+						boid.y -= height + 2 * boid.r;
 					}
 
 					{
@@ -177,9 +202,9 @@
 						const dy = boid.y - mouse.y;
 						const dist = Math.hypot(dx, dy);
 
-						if (dist < 200) {
-							boid.vx += dx / dist / dist * 10;
-							boid.vy += dy / dist / dist * 10;
+						if (dist < 100) {
+							boid.vx += dx / dist / dist * 20;
+							boid.vy += dy / dist / dist * 20;
 						}
 					}
 
@@ -198,9 +223,9 @@
 
 					const speed = Math.hypot(boid.vx, boid.vy);
 
-					if (speed > 3) {
-						boid.vx /= speed / 3;
-						boid.vy /= speed / 3;
+					if (speed > 2) {
+						boid.vx /= speed / 2;
+						boid.vy /= speed / 2;
 					}
 				}
 			}
