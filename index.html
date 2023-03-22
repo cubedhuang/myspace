@@ -34,9 +34,8 @@
 				pointer-events: none;
 			}
 
-			img {
+			.square {
 				aspect-ratio: 1 / 1;
-				object-fit: cover;
 			}
 
 		</style>
@@ -60,7 +59,7 @@
 				<span class="text-pink-500 font-semibold">web developer</span>
 				who loves to make things. check out my stuff on
 				<a href="https://github.com/cubedhuang" class="mx-0.5 text-blue-500 font-semibold relative content
-						after::(absolute block -inset-x-1 bottom-0 h-4 opacity-10 bg-blue-500 rounded-full transition-all duration-300)
+						after::(absolute -inset-x-1 bottom-0 h-4 opacity-10 bg-blue-500 rounded-full transition-all duration-300)
 						hover:after::(inset-x-0 bottom-0 h-2 opacity-30)">
 					github</a>!
 			</p>
@@ -70,7 +69,7 @@
 			<ul class="ml-6 mt-8 list-disc">
 				<li class="mt-2">
 					<a href="https://nimi.li" class="mx-0.5 text-blue-500 font-semibold relative content
-							after::(absolute block -inset-x-1 bottom-0 h-4 opacity-10 bg-blue-500 rounded-full transition-all duration-300)
+							after::(absolute -inset-x-1 bottom-0 h-4 opacity-10 bg-blue-500 rounded-full transition-all duration-300)
 							hover:after::(inset-x-0 bottom-0 h-2 opacity-30)">
 						nimi.li</a>
 					&ndash; a dictionary for the constructed language
@@ -78,7 +77,7 @@
 				</li>
 				<li class="mt-2">
 					<a href="https://board.dan.onl" class="mx-0.5 text-blue-500 font-semibold relative content
-							after::(absolute block -inset-x-1 bottom-0 h-4 opacity-10 bg-blue-500 rounded-full transition-all duration-300)
+							after::(absolute -inset-x-1 bottom-0 h-4 opacity-10 bg-blue-500 rounded-full transition-all duration-300)
 							hover:after::(inset-x-0 bottom-0 h-2 opacity-30)">
 						pseudocode interpreter</a>
 					&ndash; an interpreter for college board&rsquo;s pseudocode on the
@@ -86,7 +85,7 @@
 				</li>
 				<li class="mt-2">
 					<a href="https://boids.cubedhuang.com" class="mx-0.5 text-blue-500 font-semibold relative content
-							after::(absolute block -inset-x-1 bottom-0 h-4 opacity-10 bg-blue-500 rounded-full transition-all duration-300)
+							after::(absolute -inset-x-1 bottom-0 h-4 opacity-10 bg-blue-500 rounded-full transition-all duration-300)
 							hover:after::(inset-x-0 bottom-0 h-2 opacity-30)">
 						boids</a>
 					&ndash; a <span class="font-semibold">flocking simulation</span> like the
@@ -97,12 +96,44 @@
 			<h2 class="mt-20 text-3xl font-bold text-pink-500">abby&rsquo;s cats!</h2>
 
 			<div class="mt-8 grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-				<img src="https://cdn.discordapp.com/attachments/982000226531414086/1087896295114543165/5867820E-880A-4171-9944-09CC622EF9C9.jpg"
-					alt="captain" class="rounded-xl shadow-lg shadow-pink-600">
-				<img src="https://cdn.discordapp.com/attachments/982000226531414086/1087896176298307684/32E82C0B-95CA-45C1-AF83-225D2BC8066E.jpg"
-					alt="myles" class="rounded-xl shadow-lg shadow-pink-600">
-				<img src="https://cdn.discordapp.com/attachments/982000226531414086/1087897080829313115/1B420E98-E224-41F0-90ED-671E0F6E2057.jpg"
-					alt="myles" class="rounded-xl shadow-lg shadow-pink-600">
+				<div
+					class="group square relative grid place-items-center rounded-xl shadow-lg overflow-hidden">
+					<img src="https://cdn.discordapp.com/attachments/982000226531414086/1087896295114543165/5867820E-880A-4171-9944-09CC622EF9C9.jpg"
+						alt="captain" class="absolute top-0 left-0 w-full h-full object-cover transition duration-500
+							group-hover:(scale-110)">
+					<div
+						class="absolute bg-pink-50 top-0 left-0 w-full h-full opacity-0 transition duration-500 group-hover:opacity-75">
+					</div>
+					<h3 class="z-10 text-pink-500 text-2xl font-bold opacity-0 scale-90 transition duration-500
+							group-hover:(opacity-100 scale-100)">
+						captain</h3>
+				</div>
+
+				<div
+					class="group square relative grid place-items-center rounded-xl shadow-lg overflow-hidden">
+					<img src="https://cdn.discordapp.com/attachments/982000226531414086/1087896176298307684/32E82C0B-95CA-45C1-AF83-225D2BC8066E.jpg"
+						alt="myles" class="absolute top-0 left-0 w-full h-full object-cover transition duration-500
+							group-hover:(scale-110)">
+					<div
+						class="absolute bg-pink-50 top-0 left-0 w-full h-full opacity-0 transition duration-500 group-hover:opacity-75">
+					</div>
+					<h3 class="z-10 text-pink-500 text-2xl font-bold opacity-0 scale-90 transition duration-500
+							group-hover:(opacity-100 scale-100)">
+						myles</h3>
+				</div>
+
+				<div
+					class="group square relative grid place-items-center rounded-xl shadow-lg overflow-hidden">
+					<img src="https://cdn.discordapp.com/attachments/982000226531414086/1087897080829313115/1B420E98-E224-41F0-90ED-671E0F6E2057.jpg"
+						alt="lily" class="absolute top-0 left-0 w-full h-full object-cover transition duration-500
+							group-hover:(scale-110)">
+					<div
+						class="absolute bg-pink-50 top-0 left-0 w-full h-full opacity-0 transition duration-500 group-hover:opacity-75">
+					</div>
+					<h3 class="z-10 text-pink-500 text-2xl font-bold opacity-0 scale-90 transition duration-500
+							group-hover:(opacity-100 scale-100)">
+						lily</h3>
+				</div>
 			</div>
 		</div>
 
